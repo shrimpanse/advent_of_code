@@ -1,19 +1,25 @@
-import urllib.request
 import re
 
-l1 = []
-l2 = []
+def get_input_file(file_path):
+    l1 = []
+    l2 = []
+    with open(file_path, "r") as data:
+        for d in data:
+            pair = re.split(r'\s+', d.strip())
+            l1.append(pair[0])
+            l2.append(pair[1])
+    return l1, l2
 
-with open("input.txt", "r") as data:
-    for d in data:
-        pair = re.split(r'\s+', d.strip())
-        l1.append(pair[0])
-        l2.append(pair[1])
+def main():
+    list1, list2 = get_input_file("input.txt")
 
-answer = 0
+    answer = 0
+    for l in list1:
+        appearance = list2.count(l)
+        answer += int(l) * appearance
 
-for l in l1:
-    appearance = l2.count(l)
-    answer += int(l) * appearance
+    print(answer)
+    return 0
 
-print(answer)
+if __name__ == '__main__':
+    main()
